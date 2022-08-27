@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableHighlight, View } from 'react-native';
 const Stack = createNativeStackNavigator();
 import { useEffect, useState } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import Home from './Home'
 import Content from './Content';
+import { StatusBar } from 'react-native';
 export default function App() {
   const [data, setData] = useState('')
   useEffect(() => {
@@ -18,13 +17,15 @@ export default function App() {
   )
   return (
     <NavigationContainer>
+      <StatusBar animated={true}
+        backgroundColor="blue" />
+
       <Stack.Navigator>
         <Stack.Screen name="home" title='M.M.Events - Anakapalle' component={Home}
           options={{
             headerTitle: 'M.M.Events - Anakapalle',
             headerStyle: {
-              backgroundColor: 'blue',
-              textAlign: "center"
+              backgroundColor: 'blue'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

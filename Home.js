@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { RefreshControl, SafeAreaView, FlatList, View, Text, Pressable, Image, ScrollView, ActivityIndicator, TouchableHighlight } from 'react-native';
+import { RefreshControl, SafeAreaView, FlatList, View, Text, Pressable, Image, ScrollView, ActivityIndicator } from 'react-native';
 import MarqueeText from 'react-native-marquee';
+import VerticalData from './VerticalData';
 
 export default function Home({ navigation }) {
     const [isLoading2, setLoading2] = useState(true)
@@ -52,23 +53,27 @@ export default function Home({ navigation }) {
         </Pressable >
     );
     const renderItem = (item, type) => (
-        <TouchableHighlight>
-            <Item label={item.label} title={item.title} backgroundColor={item.backgroundColor} img={item.image} key={item.id + type} type={type}
-            />
-        </TouchableHighlight>
+        <Item label={item.label} title={item.title} backgroundColor={item.backgroundColor} img={item.image} key={item.id + type} type={type}
+        />
     );
     const onRefresh = useCallback(() => {
+        setLoading2(true)
         getData()
     }, []);
     return (
         <SafeAreaView>
             {isLoading2 ? <View style={{
-                flex: 1,
-                justifyContent: "center"
+                backgroundColor: "#ff5458", height: "100%", paddingTop: "30%"
             }}>
-                <ActivityIndicator size="large" color="#0000ff" />
+                <Image
+                    style={{ width: "100%", height: 400, marginBottom: 20, marginTop: 5 }}
+                    source={{ uri: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKNiJE88OokqHdbCIZVmNbp2ctUqSmKKKz3pWeSqzGTI8vX8AxspHwKAuAX8QLXtvf4_NrYdoMZxFPOirkEJCiFWiKeLjdyzo0GIPcrz6OvVBgNV3VvBhXN_6vY3m95hNOOuyCS0y2hm0Jz2oDRzj_q5EiZhCIecfxB7pESsw7VW3shCmcJl9dVMljvg/s16000/loader22.gif" }} />
             </View>
                 : <ScrollView
+                    nestedScrollEnabled={true}
+                    scrollViewProps={{
+                        decelerationRate: "fast"
+                    }}
                     refreshControl={
                         <RefreshControl
                             refreshing={refreshing}
@@ -85,8 +90,8 @@ export default function Home({ navigation }) {
                         <View style={{ flex: 2, borderBottomColor: "green", borderBottomWidth: 2, borderTopColor: "green", borderTopWidth: 2 }}>
                             <MarqueeText
                                 style={{ fontSize: 20 }}
-                                speed={0.3}
-                                delay={1000}
+                                speed={0.4}
+                                delay={500}
                                 marqueeOnStart={true}
                                 loop={true}
                             >
@@ -115,21 +120,11 @@ export default function Home({ navigation }) {
                         M.M.Events - Anakapalle
                     </Text>
                     <View>
-                        <FlatList
-                            data={DATA}
-                            renderItem={({ item }) => renderItem(item, 'column')}
-                            keyExtractor={item => item.id}
-
-                            contentContainerStyle={{ alignSelf: 'flex-start' }}
-                            numColumns={2}
-                            showsVerticalScrollIndicator={false}
-                            showsHorizontalScrollIndicator={false}
-                            scrollEnabled={true}
-                        /></View>
+                        <VerticalData DATA={DATA} renderIte={renderItem} />
+                    </View>
                     <Image
                         style={{ width: "100%", height: 200, marginBottom: 20 }}
                         source={{ uri: scrollImgScroll.img2 }} />
-
 
                 </ScrollView >}
         </SafeAreaView >
