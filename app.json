@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "mmevents",
+    "name": "MM Events",
     "slug": "mmevents",
-    "version": "1.0.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -24,10 +24,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.anakpalli.mmevents",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "14d2bc0b-e68c-46ab-a319-c9421be0aac6"
+      }
     }
   }
 }
